@@ -1,0 +1,272 @@
+
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+    google.load("jquery", "1.3.2");
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="./assets/style.css" media="screen" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+
+<html lang="en">
+
+<head>
+    <title>Latent-GRM: Latent Gaussian Reconstruction Model for High Quality 3D Reconstruction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script type="text/javascript"
+        src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+
+    <style>
+        .new-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-left: 75px;
+        }
+
+        .new-container2 {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-left: 30px;
+        }
+
+        .new-container3 {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-left: 106px;
+        }
+
+        .new-container4 {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            margin-left: 60px;
+        }
+    </style>
+
+    <!-- <script src="assets/js/video_comparison.js"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="title" display="block">
+            <b>
+                Latent-GRM: Latent Gaussian Reconstruction Model for High-Quality 3D Reconstruction
+            </b>
+        </div>
+
+        <br>
+        <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous</span>
+        </div>
+
+        <br><br><br>
+
+        <!-- <span class="link-block">
+            <a href="https://latent-grm.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+            </a>
+        </span>
+        <span class="link-block">
+            <a href="https://latent-grm.github.io"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+            </a>
+        </span> -->
+
+        <div class="img-with-text">
+            <img width="900" src="./figures/teaser.png">
+        </div>
+        <div class="content has-text-justified">
+            <p style="width: 900;text-align: justify;">
+                Latent-GRM enables fast and high-quality 3D Gaussian reconstruction from sparse-view images, rendering high-fidelity normal maps, and extracting meshes, and can work in synergy with other generation models for text-to-3D and image-to-3D generation.
+            </p>
+        </div>
+
+        <br><br>
+
+        <h1>Abstract</h1>
+        <br>
+        <p style="width: 80%;text-align: justify">
+            We propose Latent-GRM, a Latent Gaussian Reconstruction Model that can reconstruct high-quality 3D assets from sparse-view images within a second. Existing methods for generalizable 3D reconstruction suffer from slow inference and rendering speeds due to inefficient volumetric rendering and mainly focus on modeling in RGB space, without view-dependent modeling. In this work, we propose 3D latent Gaussians that model view-dependent information and introduce uncertainty to model the semantic distribution around the position of Gaussian. Then, we construct a transformer-based reconstruction model to map RGB images to view-dependent latent Gaussians, which can be rendered and decoded by a lightweight convolution-based architecture. Extensive results demonstrate that our method achieves comparable results to the current state-of-the-art reconstruction model in sparse-view 3D reconstruction. We also showcase the potential of Latent-GRM in generative tasks such as text-to-3D and image-to-3D, by combining it with existing multi-view diffusion models.
+            <br><br>
+        </p>
+
+        <br>
+
+        <hr>
+
+        <h1>Method</h1>
+        <br>
+        <div class="img-with-text">
+            <img width="900" src="./figures/method.png" />
+        </div>
+
+        <p style="width: 80%;text-align: justify">
+            <b>Our method predicts the 3D latent Gaussian parameters from sparse posed images. We use a VAE to compress high-resolution images into low-resolution features. Then, we use a transformer-based model to reconstruct the latent space. We back-project the processed pixels into the latent Gaussians and render feature maps, normal maps, and alpha maps.
+        </p>
+
+        <br><br>
+
+        <hr>
+
+        <h1>Results on Google Scanned Objects</h1>
+        <div class="new-container">
+            <table width="1200" class="center">
+                <tr>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/Dog.mp4"
+                            style="width: 95%; height: auto;"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/BUNNY_RACER.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/SANDWICH_MEAL.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                </tr>
+                <tr>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/Olive_Kids_Birdie_Munch_n_Lunch.mp4"
+                            style="width: 95%; height: auto;"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/Guardians_of_the_Galaxy_Galactic_Battlers_Rocket_Raccoon_Figure.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/gso/BALANCING_CACTUS.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+        <div class="col-sm-3 my-auto center" style="margin-left:auto; margin-right: auto;">
+            <a href="./gso.html" class="btn btn-primary btn-lg btn-search" style="color: white">
+                Additional Examples
+            </a>
+        </div>
+
+        <hr>
+
+        <h1>Results on Amazon Berkeley Objects</h1>
+
+        <div class="new-container">
+            <table width="1200" class="center">
+                <tr>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B07B7DKRVM.mp4"
+                            style="width: 95%; height: auto;"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B01DA8LC0A.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B073NZQR8D.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                </tr>
+                <tr>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B075QFCJWK.mp4"
+                            style="width: 95%; height: auto;"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B07B4D6M8Q.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/abo/B07JLSNT7M.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+        <div class="col-sm-3 my-auto center" style="margin-left:auto; margin-right: auto;">
+            <a href="./abo.html" class="btn btn-primary btn-lg btn-search" style="color: white">
+                Additional Examples
+            </a>
+        </div>
+
+        <hr>
+
+        <h1>Image/Text to 3D Generation</h1>
+        <div class="new-container">
+            <table width="1200" class="center">
+                <tr>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/i23d/1-5-fococlipping-HD.mp4"
+                            style="width: 95%; height: auto;"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/i23d/ghost.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                    <td><video muted autoplay="autoplay" loop="loop" src="./figures/i23d/3-58-fococlipping-HD.mp4"
+                            style="width: 95%; height: auto"></video></td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <video muted autoplay="autoplay" loop="loop"
+                            src="./figures/t23d/a_cocker_spaniel_wearing_a_crown.mp4"
+                            style="width: 95%; height: auto;">
+                        </video>
+                        <br>
+                        A cocker spaniel wearing a crown
+                        <br>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <video muted autoplay="autoplay" loop="loop" src="./figures/t23d/a_frog_wearing_a_sweater.mp4"
+                            style="width: 95%; height: auto;">
+                        </video>
+                        <br>
+                        A frog wearing a sweater
+                        <br>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <video muted autoplay="autoplay" loop="loop"
+                            src="./figures/t23d/Gandalf_smiling,_white_hair,_head,_photorealistic,_8K,_HD.mp4"
+                            style="width: 95%; height: auto;">
+                        </video>
+                        <br>
+                        Gandalf smiling, white hair
+                        <br>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <br>
+        <div class="col-sm-3 my-auto center" style="margin-left:auto; margin-right: auto;">
+            <a href="./gen3d.html" class="btn btn-primary btn-lg btn-search" style="color: white">
+                Additional Examples
+            </a>
+        </div>
+
+    </div>
+
+    <hr class="divider" />
+    <div class="container" style="max-width: 768px;">
+        <footer>
+            <p> Website template from <a href="https://dreamfusion3d.github.io/">DreamFusion</a> and <a
+                    href="https://mv-dream.github.io/">MVDream</a>. We thank the authors for the open-source code.</p>
+        </footer>
+    </div>
+    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
+    <script src="assets/js/yall.js"></script>
+    <script>
+        yall(
+            {
+                observeChanges: true
+            }
+        );
+    </script>
+
+    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
+    <script src="assets/js/yall.js"></script>
+    <script>
+        yall(
+            {
+                observeChanges: true
+            }
+        );
+    </script>
+</body>
+
+</html>
